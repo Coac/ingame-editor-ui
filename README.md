@@ -1,2 +1,29 @@
-# debug-scene-ui
-Unity3D Scripts Debug Scene UI
+# Debug Scene UI
+Unity3D in-game UI which shows at runtime a Hierarchy and a Inspector like the built-in Editor.
+Can be useful when testing game on Android or doing some reverse-engineering ;)
+
+## Features
+
+### Hierarchy
+The Hierarchy displays all GameObjects in the active Scene.
+
+- Update the GameObject list
+- Expand a GameObject to show its children
+- Remove a GameObject
+- Inspect a GameObject
+
+### Inspector
+The Hierarchy lists the components of the selected GameObject
+- Remove a components
+- Enable/Disable a MonoBehaviour
+- Show the component fields
+- Show the component props
+- Show the component methods
+
+## Usage
+Simply drops the scripts in your Unity3D Project and attach `DebugSceneUI` to a GameObject
+
+## Example
+Used in the free [Flappy Bird Style Project](https://www.assetstore.unity3d.com/en/#!/content/80330)
+
+![ScreenDemo png](/screenDemo.png)
