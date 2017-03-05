@@ -27,6 +27,8 @@ public class GameObjectItem
 
     public void draw()
     {
+        if (this.go == null) return;
+
         this.gameObjectDisplay();
 
         foreach (GameObjectItem item in this.childItems)
@@ -35,13 +37,23 @@ public class GameObjectItem
         }
     }
 
-    void gameObjectDisplay()
+    private void gameObjectDisplay()
     {
         GUILayout.BeginHorizontal();
 
         GUILayout.Label("", GUILayout.Width(this.offset));
 
+        if (GUILayout.Button("X", GUILayout.Width(30)))
+        {
+            UnityEngine.Object.Destroy(this.go);
+        }
+
         if (GUILayout.Button(this.go.transform.name + " " + this.go.transform.childCount))
+        {
+            this.inspector.displayComponents(this.go);
+        }
+
+        if (GUILayout.Button("V", GUILayout.Width(30)))
         {
             if (childItems.Count > 0)
             {
@@ -54,13 +66,8 @@ public class GameObjectItem
                     this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, offset + 10));
                 }
             }
-           
         }
 
-        if (GUILayout.Button("->", GUILayout.Width(30)))
-        {
-            this.inspector.displayComponents(this.go);
-        }
         GUILayout.EndHorizontal();
     }
 
