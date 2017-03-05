@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HierarchyInGame : MonoBehaviour {
+public class Hierarchy {
 
-    private List<GameObject> rootObjects = new List<GameObject>();
-    private List<GameObjectItem> rootObjectItems = new List<GameObjectItem>();
+    private List<GameObject> rootObjects;
+    private List<GameObjectItem> rootObjectItems;
 
-    void Start () {
+    public Hierarchy()
+    {
+        this.rootObjects = new List<GameObject>();
+        this.rootObjectItems = new List<GameObjectItem>();
         this.updateRootObjects();
     }
 
@@ -27,10 +30,9 @@ public class HierarchyInGame : MonoBehaviour {
     }
 
 
-    void OnGUI()
+    public void draw()
     {
         hierachyRect = GUI.Window(0, hierachyRect, HierarchyFunction, "Hierarchy");
-        Inspector.draw(new Rect(Screen.width - 400, 0, 400, Screen.height));
     }
 
     private Rect hierachyRect = new Rect(0, 0, 400, Screen.height);
