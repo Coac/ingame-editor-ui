@@ -10,16 +10,19 @@ public class GameObjectItem
     public GameObject go;
     private List<GameObjectItem> childItems = new List<GameObjectItem>();
     private int offset = 0;
+    private Inspector inspector;
 
-    public GameObjectItem(GameObject go)
+    public GameObjectItem(GameObject go, Inspector inspector)
     {
         this.go = go;
+        this.inspector = inspector;
     }
 
-    public GameObjectItem(GameObject go, int offset)
+    public GameObjectItem(GameObject go, Inspector inspector, int offset)
     {
         this.go = go;
         this.offset = offset;
+        this.inspector = inspector;
     }
 
     public void draw()
@@ -38,7 +41,7 @@ public class GameObjectItem
 
         GUILayout.Label("", GUILayout.Width(this.offset));
 
-        if (GUILayout.Button(this.go.transform.name))
+        if (GUILayout.Button(this.go.transform.name + " " + this.go.transform.childCount))
         {
             if (childItems.Count > 0)
             {
@@ -48,8 +51,7 @@ public class GameObjectItem
             {
                 foreach (Transform child in go.transform)
                 {
-                    Debug.Log(child.name);
-                    this.childItems.Add(new GameObjectItem(child.gameObject, offset + 10));
+                    this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, offset + 10));
                 }
             }
            
@@ -57,7 +59,7 @@ public class GameObjectItem
 
         if (GUILayout.Button("->", GUILayout.Width(30)))
         {
-            Inspector.displayComponents(this.go);
+            this.inspector.displayComponents(this.go);
         }
         GUILayout.EndHorizontal();
     }

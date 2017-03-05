@@ -5,17 +5,19 @@ using UnityEngine;
 public class DebugSceneUI : MonoBehaviour
 {
 
-    Hierarchy hierarchy;
+    private Hierarchy hierarchy;
+    private Inspector inspector;
 
     void Start()
     {
-        this.hierarchy = new Hierarchy();
+        this.inspector = new Inspector();
+        this.hierarchy = new Hierarchy(this.inspector);
     }
 
     void OnGUI()
     {
         this.hierarchy.draw();
-        Inspector.draw(new Rect(Screen.width - 400, 0, 400, Screen.height));
+        this.inspector.draw(new Rect(Screen.width - 400, 0, 400, Screen.height));
     }
 
 

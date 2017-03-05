@@ -6,11 +6,13 @@ public class Hierarchy {
 
     private List<GameObject> rootObjects;
     private List<GameObjectItem> rootObjectItems;
+    private Inspector inspector;
 
-    public Hierarchy()
+    public Hierarchy(Inspector inspector)
     {
         this.rootObjects = new List<GameObject>();
         this.rootObjectItems = new List<GameObjectItem>();
+        this.inspector = inspector;
         this.updateRootObjects();
     }
 
@@ -24,7 +26,7 @@ public class Hierarchy {
             if (xform.parent == null)
             {
                 rootObjects.Add(xform.gameObject);
-                rootObjectItems.Add(new GameObjectItem(xform.gameObject));
+                rootObjectItems.Add(new GameObjectItem(xform.gameObject, inspector));
             }
         }
     }
