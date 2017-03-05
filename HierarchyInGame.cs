@@ -5,18 +5,23 @@ using UnityEngine;
 public class HierarchyInGame : MonoBehaviour {
 
     private List<GameObject> rootObjects = new List<GameObject>();
-	void Start () {
+    private List<GameObjectItem> rootObjectItems = new List<GameObjectItem>();
+
+    void Start () {
         this.updateRootObjects();
     }
 
     private void updateRootObjects()
     {
         this.rootObjects.Clear();
+        this.rootObjectItems.Clear();
+
         foreach (Transform xform in UnityEngine.Object.FindObjectsOfType<Transform>())
         {
             if (xform.parent == null)
             {
                 rootObjects.Add(xform.gameObject);
+                rootObjectItems.Add(new GameObjectItem(xform.gameObject));
             }
         }
     }
@@ -45,9 +50,9 @@ public class HierarchyInGame : MonoBehaviour {
     
             GUILayout.BeginArea(new Rect(0, 0, contentWidth, contentHeight));
 
-                foreach (GameObject go in this.rootObjects)
+                foreach (GameObjectItem item in this.rootObjectItems)
                 {
-                    gameObjectDisplay(go);
+                    item.draw();
                 }
 
             GUILayout.EndArea();
@@ -55,20 +60,4 @@ public class HierarchyInGame : MonoBehaviour {
         GUI.EndScrollView();
     }
 
-
-
-    void gameObjectDisplay(GameObject go)
-    {
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button(go.transform.name))
-        {
-            Debug.Log("lol");
-        }
-
-        if (GUILayout.Button("->", GUILayout.Width(30)))
-        {
-            Inspector.displayComponents(go);
-        }
-        GUILayout.EndHorizontal();
-    }
 }
