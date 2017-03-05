@@ -37,7 +37,7 @@ public class Hierarchy {
         hierachyRect = GUI.Window(0, hierachyRect, HierarchyFunction, "Hierarchy");
     }
 
-    private Rect hierachyRect = new Rect(0, 0, 400, Screen.height);
+    private Rect hierachyRect = new Rect(0, 0, 500, Screen.height);
     private Vector2 scrollViewVector = Vector2.zero;
     void HierarchyFunction(int windowID)
     {
@@ -47,7 +47,7 @@ public class Hierarchy {
         }
 
         int contentHeight = Screen.height * 2;
-        int scrollViewMargin = 20;
+        int scrollViewMargin = 5;
         int contentWidth = (int)hierachyRect.width - scrollViewMargin - 20;
 
         scrollViewVector = GUI.BeginScrollView(new Rect(scrollViewMargin, 50, hierachyRect.width - scrollViewMargin - 10, hierachyRect.height), scrollViewVector, new Rect(0, 0, contentWidth, contentHeight));

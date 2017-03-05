@@ -8,9 +8,17 @@ using UnityEngine;
 public class ComponentView
 {
     public Component co;
-    private Inspector inspector;
 
     private string text;
+
+    private bool displayField = false;
+    private string fields = "";
+
+    private bool displayProps = false;
+    private string props = "";
+
+    private bool displayMethod = false;
+    private string methods = "";
 
     public ComponentView(Component co)
     {
@@ -25,10 +33,23 @@ public class ComponentView
         this.text += "\n\tAttributes = " + t.Attributes;
         System.Reflection.FieldInfo[] fieldInfo = t.GetFields();
         foreach (System.Reflection.FieldInfo info in fieldInfo)
-            this.text += "\nField:" + info.Name;
+            this.fields += "\n" + info.Name;
         System.Reflection.PropertyInfo[] propertyInfo = t.GetProperties();
         foreach (System.Reflection.PropertyInfo info in propertyInfo)
-            this.text += "\nProp:" + info.Name;
+            this.props += "\n" + info.Name;
+
+        MethodInfo[] methodInfos = t.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+            this.methods += "\n" + methodInfo.ReturnType.Name + " " + methodInfo.Name + "(";
+            foreach (ParameterInfo p in methodInfo.GetParameters())
+            {
+                this.methods += p.ParameterType.Name + " " + p.Name + ", ";
+            }
+            this.methods += ")";
+            
+        }
+         
     }
 
 
@@ -57,7 +78,34 @@ public class ComponentView
 
         GUILayout.EndHorizontal();
         GUILayout.TextArea(this.text);
-        
+
+        if (fields != "" && GUILayout.Button("Fields", GUILayout.Height(16)))
+        {
+            this.displayField = !this.displayField;
+        }
+        if (displayField)
+        {
+            GUILayout.TextArea(this.fields);
+        }
+
+        if (GUILayout.Button("Props", GUILayout.Height(16)))
+        {
+            this.displayProps = !this.displayProps;
+        }
+        if (displayProps)
+        {
+            GUILayout.TextArea(this.props);
+        }
+
+        if (GUILayout.Button("Methods", GUILayout.Height(16)))
+        {
+            this.displayMethod = !this.displayMethod;
+        }
+        if(displayMethod)
+        {
+            GUILayout.TextArea(this.methods);
+        }
+
     }
 
 
