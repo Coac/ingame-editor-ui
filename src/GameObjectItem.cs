@@ -9,7 +9,8 @@ public class GameObjectItem
 {
     public GameObject go;
     private List<GameObjectItem> childItems = new List<GameObjectItem>();
-    private int offset = 0;
+    private int offsetSize = 10;
+    private int childLevel = 0;
     private Inspector inspector;
 
     public GameObjectItem(GameObject go, Inspector inspector)
@@ -18,10 +19,10 @@ public class GameObjectItem
         this.inspector = inspector;
     }
 
-    public GameObjectItem(GameObject go, Inspector inspector, int offset)
+    public GameObjectItem(GameObject go, Inspector inspector, int childLevel)
     {
         this.go = go;
-        this.offset = offset;
+        this.childLevel = childLevel;
         this.inspector = inspector;
     }
 
@@ -41,7 +42,7 @@ public class GameObjectItem
     {
         GUILayout.BeginHorizontal();
 
-        GUILayout.Label("", GUILayout.Width(this.offset));
+        GUILayout.Label("", GUILayout.Width(this.offsetSize * this.childLevel));
 
         if (GUILayout.Button("X", GUILayout.Width(30)))
         {
@@ -63,7 +64,7 @@ public class GameObjectItem
             {
                 foreach (Transform child in go.transform)
                 {
-                    this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, offset + 10));
+                    this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, this.childLevel + 1));
                 }
             }
         }
