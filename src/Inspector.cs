@@ -21,13 +21,13 @@ public class Inspector : MonoBehaviour
     private void inspectorFunction(int windowID)
     {
 
-        scrollViewVector = GUI.BeginScrollView(new Rect(0, 20, this.inspectorRect.width, this.inspectorRect.height), scrollViewVector, new Rect(0, 0, this.inspectorRect.width, this.inspectorRect.height*10));
+        scrollViewVector = GUILayout.BeginScrollView(scrollViewVector);
         foreach (ComponentView view in this.componentsViews)
         {
             view.draw();
         }
-        
-        GUI.EndScrollView();
+
+        GUILayout.EndScrollView();
     }
 
     public void displayComponents(GameObject go)

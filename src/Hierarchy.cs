@@ -31,7 +31,6 @@ public class Hierarchy {
         }
     }
 
-
     public void draw()
     {
         hierachyRect = GUI.Window(0, hierachyRect, HierarchyFunction, "Hierarchy");
@@ -48,25 +47,24 @@ public class Hierarchy {
 
         if (GUILayout.Button("Save GameObjects in TextFile"))
         {
-            Debug.Log(this.ToString());
+            this.saveGameObjectsAsTxtFile();
         }
 
-        int contentHeight = Screen.height * 2;
-        int scrollViewMargin = 5;
-        int contentWidth = (int)hierachyRect.width - scrollViewMargin - 20;
+        scrollViewVector = GUILayout.BeginScrollView(scrollViewVector);
 
-        scrollViewVector = GUI.BeginScrollView(new Rect(scrollViewMargin, 70, hierachyRect.width - scrollViewMargin - 10, hierachyRect.height), scrollViewVector, new Rect(0, 0, contentWidth, contentHeight));
+        foreach (GameObjectItem item in this.rootObjectItems)
+        {
+            item.draw();
+        }
 
-            GUILayout.BeginArea(new Rect(0, 0, contentWidth, contentHeight));
+        GUILayout.EndScrollView();
+    }
 
-                foreach (GameObjectItem item in this.rootObjectItems)
-                {
-                    item.draw();
-                }
-
-            GUILayout.EndArea();
-
-        GUI.EndScrollView();
+    private void saveGameObjectsAsTxtFile()
+    {
+        string gameobjects = this.ToString();
+        Debug.Log(gameobjects);
+        System.IO.File.WriteAllText(@"C:\Users\Coac\Downloads\go.txt", gameobjects);
     }
 
     public override string ToString()
