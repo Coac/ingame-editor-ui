@@ -20,6 +20,9 @@ The Hierarchy lists the components of the selected GameObject
 - Show the component props
 - Show the component methods
 
+### Miscellaneous
+- Toggle the debug UI with configurable Key (default = `END`)
+
 ## Usage
 Simply drops the scripts in your Unity3D Project and attach `DebugSceneUI` to a GameObject
 
