@@ -1,11 +1,18 @@
-﻿using System;
+﻿/*==== Inspector.cs ========================================================
+ * Inspector that holds the components
+ * 
+ * Author: Victor Le aka "Coac"
+ * Repository : https://github.com/Coac/debug-scene-ui
+ * =========================================================================*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
 
-public class Inspector : MonoBehaviour
+public class Inspector
 {
 
     private List<ComponentView> componentsViews = new List<ComponentView>();

@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*==== Hierarchy.cs ======================================================
+ * Hierarchy list the active gameObjects
+ * 
+ * Author: Victor Le aka "Coac"
+ * Repository : https://github.com/Coac/debug-scene-ui
+ * =======================================================================*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

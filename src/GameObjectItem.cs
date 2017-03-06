@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*==== GameObjectItem.cs ===================================================
+ * A GameObjectItem is a gameObject representation.
+ * 
+ * Author: Victor Le aka "Coac"
+ * Repository : https://github.com/Coac/debug-scene-ui
+ * =========================================================================*/
+
+ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
