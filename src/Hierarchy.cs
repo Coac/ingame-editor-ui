@@ -46,12 +46,17 @@ public class Hierarchy {
             this.updateRootObjects();
         }
 
+        if (GUILayout.Button("Save GameObjects in TextFile"))
+        {
+            Debug.Log(this.ToString());
+        }
+
         int contentHeight = Screen.height * 2;
         int scrollViewMargin = 5;
         int contentWidth = (int)hierachyRect.width - scrollViewMargin - 20;
 
-        scrollViewVector = GUI.BeginScrollView(new Rect(scrollViewMargin, 50, hierachyRect.width - scrollViewMargin - 10, hierachyRect.height), scrollViewVector, new Rect(0, 0, contentWidth, contentHeight));
-    
+        scrollViewVector = GUI.BeginScrollView(new Rect(scrollViewMargin, 70, hierachyRect.width - scrollViewMargin - 10, hierachyRect.height), scrollViewVector, new Rect(0, 0, contentWidth, contentHeight));
+
             GUILayout.BeginArea(new Rect(0, 0, contentWidth, contentHeight));
 
                 foreach (GameObjectItem item in this.rootObjectItems)
@@ -62,6 +67,18 @@ public class Hierarchy {
             GUILayout.EndArea();
 
         GUI.EndScrollView();
+    }
+
+    public override string ToString()
+    {
+        string str = "";
+
+        foreach(GameObjectItem item in this.rootObjectItems)
+        {
+            str += item.ToString() + "\n";
+        }
+
+        return str;
     }
 
 }

@@ -56,20 +56,47 @@ public class GameObjectItem
 
         if (GUILayout.Button("V", GUILayout.Width(30)))
         {
-            if (childItems.Count > 0)
-            {
-                this.childItems.Clear();
-            }
-            else
-            {
-                foreach (Transform child in go.transform)
-                {
-                    this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, this.childLevel + 1));
-                }
-            }
+            this.toggleChild();
         }
 
         GUILayout.EndHorizontal();
+    }
+
+    private void toggleChild()
+    {
+
+        if (childItems.Count > 0)
+        {
+            this.childItems.Clear();
+            return;
+        }
+
+        this.expandChild();
+    }
+
+    private void expandChild()
+    {
+        foreach (Transform child in go.transform)
+        {
+            this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, this.childLevel + 1));
+        }
+    }
+
+    public override string ToString()
+    {
+        string str = "";
+        for (int i = 0; i < this.childLevel; i++)
+        {
+            str += "  ";
+        }
+        str += this.go.name;
+
+        foreach(GameObjectItem item in this.childItems)
+        {
+            str += "\n" + item.ToString();
+        }
+
+        return str;
     }
 
 }

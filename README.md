@@ -8,6 +8,7 @@ Can be useful when testing game on Android or doing some reverse-engineering ;)
 The Hierarchy displays all GameObjects in the active Scene.
 
 - Update the GameObject list
+- Save all displayed GameObject in a text file
 - Expand a GameObject to show its children
 - Remove a GameObject
 - Inspect a GameObject
