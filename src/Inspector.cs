@@ -17,9 +17,13 @@ public class Inspector
 
     private List<ComponentView> componentsViews = new List<ComponentView>();
 
-    public void draw(Rect screenRect)
+    public Inspector(Rect inspectorRect)
     {
-        this.inspectorRect = screenRect;
+        this.inspectorRect = inspectorRect;
+    }
+
+    public void draw()
+    {
         inspectorRect = GUI.Window(1, inspectorRect, inspectorFunction, "Inspector");
     }
 

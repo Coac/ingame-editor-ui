@@ -16,14 +16,17 @@ public class DebugSceneUI : MonoBehaviour
 
     private Hierarchy hierarchy;
     private Inspector inspector;
+    private DebugConsole console;
+
 
     public KeyCode toggleGuiKey = KeyCode.End;
     private bool toggleUI = true;
 
     void Start()
     {
-        this.inspector = new Inspector();
+        this.inspector = new Inspector(new Rect(Screen.width - 400, 0, 400, Screen.height));
         this.hierarchy = new Hierarchy(this.inspector);
+        this.console = new DebugConsole(new Rect(0, Screen.height - Screen.height / 5, Screen.width, Screen.height / 5));
     }
 
     void Update()
@@ -38,8 +41,10 @@ public class DebugSceneUI : MonoBehaviour
     {
         if (!toggleUI) return;
 
+        this.console.draw();
         this.hierarchy.draw();
-        this.inspector.draw(new Rect(Screen.width - 400, 0, 400, Screen.height));
+        this.inspector.draw();
+        
     }
 
 }
