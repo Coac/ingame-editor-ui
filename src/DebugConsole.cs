@@ -16,9 +16,13 @@ public class DebugConsole
 {
 
     private Rect debugConsoleRect;
+    private string logs;
+
     public DebugConsole(Rect debugConsoleRect)
     {
         this.debugConsoleRect = debugConsoleRect;
+        this.logs = "";
+        Application.logMessageReceived += this.logHandler;
     }
 
     private Vector2 scrollViewVector = Vector2.zero;
@@ -28,16 +32,17 @@ public class DebugConsole
         debugConsoleRect = GUI.Window(3, debugConsoleRect, debugConsoleFunction, "Debug Console");
     }
 
+    void logHandler(string message, string stackTrace, LogType type)
+    {
+        logs += message + "\n";
+    }
+
     private void debugConsoleFunction(int windowID)
     {
-
         this.scrollViewVector = GUILayout.BeginScrollView(this.scrollViewVector);
 
-        for (int i = 0; i < 100; i++)
-        {
-            GUILayout.Label("Test log " + i);
-        }
-
+        GUILayout.TextArea(this.logs);
+    
         GUILayout.EndScrollView();
     }
 
