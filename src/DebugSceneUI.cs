@@ -24,9 +24,9 @@ public class DebugSceneUI : MonoBehaviour
 
     void Start()
     {
-        this.inspector = new Inspector(new Rect(Screen.width - 400, 0, 400, Screen.height));
-        this.hierarchy = new Hierarchy(this.inspector);
-        this.console = new DebugConsole(new Rect(0, Screen.height - Screen.height / 5, Screen.width, Screen.height / 5));
+        this.inspector = new Inspector(new Rect(Screen.width - 400, 0, 400, Screen.height - Screen.height / 5));
+        this.hierarchy = new Hierarchy(new Rect(0, 0, 500, Screen.height), this.inspector);
+        this.console = new DebugConsole(new Rect(500, Screen.height - Screen.height / 5, Screen.width - 500, Screen.height / 5));
     }
 
     void Update()

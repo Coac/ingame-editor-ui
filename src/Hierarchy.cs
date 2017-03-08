@@ -15,11 +15,12 @@ public class Hierarchy {
     private List<GameObjectItem> rootObjectItems;
     private Inspector inspector;
 
-    public Hierarchy(Inspector inspector)
+    public Hierarchy(Rect hierachyRect, Inspector inspector)
     {
         this.rootObjects = new List<GameObject>();
         this.rootObjectItems = new List<GameObjectItem>();
         this.inspector = inspector;
+        this.hierachyRect = hierachyRect;
         this.updateRootObjects();
     }
 
@@ -43,7 +44,7 @@ public class Hierarchy {
         hierachyRect = GUI.Window(0, hierachyRect, HierarchyFunction, "Hierarchy");
     }
 
-    private Rect hierachyRect = new Rect(0, 0, 500, Screen.height);
+    private Rect hierachyRect;
     private Vector2 scrollViewVector = Vector2.zero;
     void HierarchyFunction(int windowID)
     {
