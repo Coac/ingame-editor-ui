@@ -57,12 +57,15 @@ public class DebugConsole
             switch (log.logType)
             {
                 case LogType.Error:
+                    if (!displayError) continue;
                     style.normal.textColor = Color.red;
                     break;
                 case LogType.Warning:
+                    if (!displayWarning) continue;
                     style.normal.textColor = Color.yellow;
                     break;
                 default:
+                    if (!displayWarning) continue;
                     style.normal.textColor = Color.white;
                     break;
             }
@@ -79,13 +82,25 @@ public class DebugConsole
         }
     }
 
+
+    private bool displayError = true;
+    private bool displayWarning = true;
+    private bool displayNormal = true;
+
     private void debugConsoleFunction(int windowID)
     {
         this.scrollViewVector = GUILayout.BeginScrollView(this.scrollViewVector);
         this.drawLogs();
         GUILayout.EndScrollView();
 
+        GUILayout.BeginHorizontal();
         this.drawClearButton();
+        GUILayout.BeginHorizontal(GUILayout.Width(200));
+        displayNormal = GUILayout.Toggle(displayNormal, "Normal");
+        displayWarning = GUILayout.Toggle(displayWarning, "Warning");
+        displayError = GUILayout.Toggle(displayError, "Error");
+        GUILayout.EndHorizontal();
+        GUILayout.EndHorizontal();
     }
 
 }
