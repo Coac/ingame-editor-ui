@@ -48,15 +48,13 @@ public class DebugConsole
         this.logs.Insert(0, new Log(message + stackTrace, type));
     }
 
-    private void debugConsoleFunction(int windowID)
+    private void drawLogs()
     {
-        this.scrollViewVector = GUILayout.BeginScrollView(this.scrollViewVector);
-
-        foreach(Log log in logs)
+        foreach (Log log in logs)
         {
             GUIStyle style = new GUIStyle();
 
-            switch(log.logType)
+            switch (log.logType)
             {
                 case LogType.Error:
                     style.normal.textColor = Color.red;
@@ -71,8 +69,23 @@ public class DebugConsole
 
             GUILayout.TextArea(log.log, style);
         }
+    }
 
+    private void drawClearButton()
+    {
+        if(GUILayout.Button("Clear", GUILayout.Width(100)))
+        {
+            this.logs.Clear();
+        }
+    }
+
+    private void debugConsoleFunction(int windowID)
+    {
+        this.scrollViewVector = GUILayout.BeginScrollView(this.scrollViewVector);
+        this.drawLogs();
         GUILayout.EndScrollView();
+
+        this.drawClearButton();
     }
 
 }
