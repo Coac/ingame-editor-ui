@@ -15,11 +15,19 @@ The Hierarchy displays all GameObjects in the active Scene.
 
 ### Inspector
 The Hierarchy lists the components of the selected GameObject
+- Display general information (tag, layer)
 - Remove a components
 - Enable/Disable a MonoBehaviour
 - Show the component fields
 - Show the component props
 - Show the component methods
+
+### Debug Console
+The Debug Console acts as the Console in Unity Editor.
+- Show all types of logs
+- Filter logs by type
+- Colorful logging
+- Clear logs
 
 ### Miscellaneous
 - Toggle the debug UI with configurable Key (default = `END`)
