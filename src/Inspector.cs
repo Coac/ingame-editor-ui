@@ -16,7 +16,7 @@ public class Inspector
 {
 
     private GameObject go;
-    private List<ComponentView> componentsViews = new List<ComponentView>();
+    private List<AbstractComponent> componentsViews = new List<AbstractComponent>();
 
     public Inspector(Rect inspectorRect)
     {
@@ -38,7 +38,7 @@ public class Inspector
         this.displayHeader();
 
         scrollViewVector = GUILayout.BeginScrollView(scrollViewVector);
-        foreach (ComponentView view in this.componentsViews)
+        foreach (AbstractComponent view in this.componentsViews)
         {
             view.draw();
         }
@@ -83,7 +83,7 @@ public class Inspector
         this.componentsViews.Clear();
         foreach (Component co in this.go.GetComponents(typeof(Component)))
         {
-            this.componentsViews.Add(new ComponentView(co));
+            this.componentsViews.Add(ComponentViewFactory.getComponentView(co));
         }
         
     }

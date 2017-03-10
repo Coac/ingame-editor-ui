@@ -1,5 +1,5 @@
-﻿/*==== ComponentView.cs ====================================================
- * ComponentView is is a Component representation
+﻿/*==== DefaultComponent.cs ====================================================
+ * DefaultComponent is a general Component representation
  * 
  * Author: Victor Le aka "Coac"
  * Repository : https://github.com/Coac/debug-scene-ui
@@ -12,10 +12,8 @@ using System.Reflection;
 using System.Text;
 using UnityEngine;
 
-public class ComponentView
+public class DefaultComponent : AbstractComponent
 {
-    public Component co;
-
     private string text;
 
     private bool displayField = false;
@@ -27,7 +25,7 @@ public class ComponentView
     private bool displayMethod = false;
     private string methods = "";
 
-    public ComponentView(Component co)
+    public DefaultComponent(Component co)
     {
         this.co = co;
 
@@ -60,31 +58,20 @@ public class ComponentView
     }
 
 
-    public void draw()
+    public override void draw()
     {
         if(co == null) { return; }
 
-        GUILayout.BeginHorizontal();
+        base.draw();
 
-        if (GUILayout.Button("X", GUILayout.Width(30)))
-        {
-            UnityEngine.Object.Destroy(this.co);
-        }
+        this.drawDefaultComponent();
+    }
 
-        GUILayout.TextArea(this.co.GetType().Name);
-        try
-        {
-            MonoBehaviour script = (MonoBehaviour)co;
-            if(GUILayout.Button(script.enabled + " ")) {
-                script.enabled = !script.enabled;
-            }
-        } catch
-        {
 
-        }
-
-        GUILayout.EndHorizontal();
+    private void drawDefaultComponent()
+    {
         GUILayout.TextArea(this.text);
+
 
         if (fields != "" && GUILayout.Button("Fields", GUILayout.Height(16)))
         {
@@ -108,11 +95,10 @@ public class ComponentView
         {
             this.displayMethod = !this.displayMethod;
         }
-        if(displayMethod)
+        if (displayMethod)
         {
             GUILayout.TextArea(this.methods);
         }
-
     }
 
 
