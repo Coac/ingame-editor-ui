@@ -19,6 +19,9 @@ public class GameObjectItem
     private int offsetSize = 10;
     private int childLevel = 0;
     private Inspector inspector;
+    public bool isSelected = false;
+
+    protected static GameObjectItem lastSelected;
 
     public GameObjectItem(GameObject go, Inspector inspector)
     {
@@ -37,8 +40,10 @@ public class GameObjectItem
     {
         if (this.go == null) return;
 
+        if(this.isSelected) GUI.color = Color.gray;
         this.gameObjectDisplay();
 
+        GUI.color = Color.white;
         foreach (GameObjectItem item in this.childItems)
         {
             item.draw();
@@ -58,6 +63,13 @@ public class GameObjectItem
 
         if (GUILayout.Button(this.go.transform.name))
         {
+            if (GameObjectItem.lastSelected != null)
+            {
+                lastSelected.isSelected = false;
+            }
+            this.isSelected = true;
+            GameObjectItem.lastSelected = this;
+
             this.inspector.setGameObject(this.go);
         }
 
