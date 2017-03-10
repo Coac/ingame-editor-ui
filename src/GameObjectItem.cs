@@ -51,12 +51,12 @@ public class GameObjectItem
 
         GUILayout.Label("", GUILayout.Width(this.offsetSize * this.childLevel));
 
-        if (GUILayout.Button("V", GUILayout.Width(30)))
+        if (this.go.transform.childCount > 0 && GUILayout.Button(this.go.transform.childCount.ToString(), GUILayout.Width(30)))
         {
             this.toggleChild();
         }
 
-        if (GUILayout.Button(this.go.transform.name + " " + this.go.transform.childCount))
+        if (GUILayout.Button(this.go.transform.name))
         {
             this.inspector.setGameObject(this.go);
         }
