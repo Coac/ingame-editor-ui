@@ -31,6 +31,7 @@ The Debug Console acts as the Console in Unity Editor.
 
 ### Miscellaneous
 - Toggle the debug UI with configurable Key (default = `END`)
+- Display FPS
 
 ## Usage
 Simply drops the scripts in your Unity3D Project and attach `DebugSceneUI` to a GameObject

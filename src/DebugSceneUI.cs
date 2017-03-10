@@ -17,6 +17,7 @@ public class DebugSceneUI : MonoBehaviour
     private Hierarchy hierarchy;
     private Inspector inspector;
     private DebugConsole console;
+    private FPSCounter fps;
 
 
     public KeyCode toggleGuiKey = KeyCode.End;
@@ -27,6 +28,8 @@ public class DebugSceneUI : MonoBehaviour
         this.inspector = new Inspector(new Rect(Screen.width - 400, 0, 400, Screen.height - Screen.height / 5));
         this.hierarchy = new Hierarchy(new Rect(0, 0, 500, Screen.height), this.inspector);
         this.console = new DebugConsole(new Rect(500, Screen.height - Screen.height / 5, Screen.width - 500, Screen.height / 5));
+        this.fps = new FPSCounter(new Rect(Screen.width / 2, 0, 100, 100));
+        StartCoroutine(this.fps.fpsCounter());
     }
 
     void Update()
@@ -44,7 +47,6 @@ public class DebugSceneUI : MonoBehaviour
         this.console.draw();
         this.hierarchy.draw();
         this.inspector.draw();
-        
+        this.fps.draw();
     }
-
 }
