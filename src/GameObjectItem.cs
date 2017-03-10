@@ -51,19 +51,14 @@ public class GameObjectItem
 
         GUILayout.Label("", GUILayout.Width(this.offsetSize * this.childLevel));
 
-        if (GUILayout.Button("X", GUILayout.Width(30)))
+        if (GUILayout.Button("V", GUILayout.Width(30)))
         {
-            UnityEngine.Object.Destroy(this.go);
+            this.toggleChild();
         }
 
         if (GUILayout.Button(this.go.transform.name + " " + this.go.transform.childCount))
         {
             this.inspector.setGameObject(this.go);
-        }
-
-        if (GUILayout.Button("V", GUILayout.Width(30)))
-        {
-            this.toggleChild();
         }
 
         GUILayout.EndHorizontal();

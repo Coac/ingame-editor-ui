@@ -54,7 +54,16 @@ public class Inspector
 
     private void displayHeader()
     {
+        GUILayout.BeginHorizontal();
+
         GUILayout.Label(this.go.name);
+        if(GUILayout.Button("X", GUILayout.Width(50))) {
+            UnityEngine.Object.Destroy(this.go);
+        }
+
+        GUILayout.EndHorizontal();
+
+
 
         GUILayout.BeginHorizontal();
 
