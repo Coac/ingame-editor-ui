@@ -15,6 +15,7 @@ using UnityEngine;
 public class Inspector
 {
 
+    private GameObject go;
     private List<ComponentView> componentsViews = new List<ComponentView>();
 
     public Inspector(Rect inspectorRect)
@@ -31,6 +32,10 @@ public class Inspector
     private Vector2 scrollViewVector = Vector2.zero;
     private void inspectorFunction(int windowID)
     {
+        if (go == null) return;
+
+
+        this.displayHeader();
 
         scrollViewVector = GUILayout.BeginScrollView(scrollViewVector);
         foreach (ComponentView view in this.componentsViews)
@@ -41,10 +46,33 @@ public class Inspector
         GUILayout.EndScrollView();
     }
 
-    public void displayComponents(GameObject go)
+    public void setGameObject(GameObject go)
+    {
+        this.go = go;
+        this.displayComponents();
+    }
+
+    private void displayHeader()
+    {
+        GUILayout.Label(this.go.name);
+
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Label("Tag", GUILayout.Width(30));
+        GUILayout.TextField(this.go.tag);
+
+        GUILayout.Space(50);
+
+        GUILayout.Label("Layer", GUILayout.Width(40));
+        GUILayout.TextField(LayerMask.LayerToName(this.go.layer));
+
+        GUILayout.EndHorizontal();
+    }
+
+    private void displayComponents()
     {
         this.componentsViews.Clear();
-        foreach (Component co in go.GetComponents(typeof(Component)))
+        foreach (Component co in this.go.GetComponents(typeof(Component)))
         {
             this.componentsViews.Add(new ComponentView(co));
         }

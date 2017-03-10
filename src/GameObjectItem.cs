@@ -58,7 +58,7 @@ public class GameObjectItem
 
         if (GUILayout.Button(this.go.transform.name + " " + this.go.transform.childCount))
         {
-            this.inspector.displayComponents(this.go);
+            this.inspector.setGameObject(this.go);
         }
 
         if (GUILayout.Button("V", GUILayout.Width(30)))
