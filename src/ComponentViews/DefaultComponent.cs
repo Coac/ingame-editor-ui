@@ -88,11 +88,9 @@ public class DefaultComponent : AbstractComponent
                 switch (info.FieldType.ToString())
                 {
                     case "System.Boolean":
-                        GUILayout.Label("");
                         info.SetValue(this.co, GUILayout.Toggle((bool)info.GetValue(this.co), info.Name));
                         break;
                     default:
-                        GUILayout.Label(info.FieldType.ToString());
                         var value = info.GetValue(this.co);
                         if (value == null)
                         {

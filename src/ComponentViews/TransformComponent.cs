@@ -35,21 +35,22 @@ public class TransformComponent : AbstractComponent
         GUILayout.Label("Position");
         GUILayout.Label("Rotation");
         GUILayout.Label("Scale");
-
         GUILayout.EndVertical();
 
         GUILayout.BeginVertical();
         GUILayout.Label("Local");
-        GUILayout.Label(trans.localPosition.ToString());
+        trans.localPosition = FieldView.displayVector3(trans.localPosition);
         GUILayout.Label(trans.localRotation.ToString());
-        GUILayout.Label(trans.localScale.ToString());
+        trans.localScale = FieldView.displayVector3(trans.localScale);
         GUILayout.EndVertical();
+
+        GUILayout.Space(10);
 
         GUILayout.BeginVertical();
         GUILayout.Label("Absolute");
-        GUILayout.Label(trans.position.ToString());
+        trans.position = FieldView.displayVector3(trans.position);
         GUILayout.Label(trans.rotation.ToString());
-        GUILayout.Label(trans.localScale.ToString());
+        trans.localScale = FieldView.displayVector3(trans.localScale);
         GUILayout.EndVertical();
 
         GUILayout.EndHorizontal();
