@@ -40,7 +40,7 @@ public class TransformComponent : AbstractComponent
         GUILayout.BeginVertical();
         GUILayout.Label("Local");
         trans.localPosition = FieldView.displayVector3(trans.localPosition);
-        GUILayout.Label(trans.localRotation.ToString());
+        trans.localRotation = Quaternion.Euler(FieldView.displayVector3(trans.localRotation.eulerAngles));
         trans.localScale = FieldView.displayVector3(trans.localScale);
         GUILayout.EndVertical();
 
@@ -49,7 +49,7 @@ public class TransformComponent : AbstractComponent
         GUILayout.BeginVertical();
         GUILayout.Label("Absolute");
         trans.position = FieldView.displayVector3(trans.position);
-        GUILayout.Label(trans.rotation.ToString());
+        trans.rotation = Quaternion.Euler(FieldView.displayVector3(trans.rotation.eulerAngles));
         trans.localScale = FieldView.displayVector3(trans.localScale);
         GUILayout.EndVertical();
 
