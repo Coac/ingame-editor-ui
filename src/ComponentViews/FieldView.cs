@@ -29,4 +29,23 @@ public class FieldView
         return vector;
     }
 
+    public static double displayDouble(double doubl)
+    {
+        return double.Parse(GUILayout.TextField(doubl.ToString()));
+    }
+
+    public static float displayFloat(float input)
+    {
+        return float.Parse(GUILayout.TextField(input.ToString()));
+    }
+
+    public static int displayInt(int input)
+    {
+        return int.Parse(GUILayout.TextField(input.ToString()));
+    }
+
+    public static bool displayBool(bool input)
+    {
+        return GUILayout.Toggle(input, "");
+    }
 }

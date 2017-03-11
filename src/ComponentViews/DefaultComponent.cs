@@ -88,7 +88,19 @@ public class DefaultComponent : AbstractComponent
                 switch (info.FieldType.ToString())
                 {
                     case "System.Boolean":
-                        info.SetValue(this.co, GUILayout.Toggle((bool)info.GetValue(this.co), info.Name));
+                        info.SetValue(this.co, FieldView.displayBool((bool)info.GetValue(this.co)));
+                        break;
+                    case "UnityEngine.Vector3":
+                        info.SetValue(this.co, FieldView.displayVector3((Vector3)info.GetValue(this.co)));
+                        break;
+                    case "System.Int32":
+                        info.SetValue(this.co, FieldView.displayInt((int)info.GetValue(this.co)));
+                        break;
+                    case "System.Single":
+                        info.SetValue(this.co, FieldView.displayFloat((float)info.GetValue(this.co)));
+                        break;
+                    case "System.Double":
+                        info.SetValue(this.co, FieldView.displayDouble((double)info.GetValue(this.co)));
                         break;
                     default:
                         var value = info.GetValue(this.co);
