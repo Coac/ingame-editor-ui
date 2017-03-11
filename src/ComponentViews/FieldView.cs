@@ -14,14 +14,16 @@ using UnityEngine;
 
 public class FieldView
 {
+    public static string format = "0.000";
+
     public static Vector3 displayVector3(Vector3 vector)
     {
         GUILayout.BeginHorizontal();
 
         vector = new Vector3(
-            float.Parse(GUILayout.TextField(vector.x.ToString())), 
-            float.Parse(GUILayout.TextField(vector.y.ToString())),
-            float.Parse(GUILayout.TextField(vector.z.ToString()))
+            float.Parse(GUILayout.TextField(vector.x.ToString(format))), 
+            float.Parse(GUILayout.TextField(vector.y.ToString(format))),
+            float.Parse(GUILayout.TextField(vector.z.ToString(format)))
             );
 
         GUILayout.EndHorizontal();
@@ -31,12 +33,12 @@ public class FieldView
 
     public static double displayDouble(double doubl)
     {
-        return double.Parse(GUILayout.TextField(doubl.ToString()));
+        return double.Parse(GUILayout.TextField(doubl.ToString(format)));
     }
 
     public static float displayFloat(float input)
     {
-        return float.Parse(GUILayout.TextField(input.ToString()));
+        return float.Parse(GUILayout.TextField(input.ToString(format)));
     }
 
     public static int displayInt(int input)
