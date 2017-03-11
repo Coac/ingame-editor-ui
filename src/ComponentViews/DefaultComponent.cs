@@ -17,12 +17,11 @@ public class DefaultComponent : AbstractComponent
     private string text;
 
     private bool displayField = false;
-    private string fields = "";
     private System.Reflection.FieldInfo[] fieldInfo;
 
 
     private bool displayProps = false;
-    private string props = "";
+    System.Reflection.PropertyInfo[] propertyInfo;
 
     private bool displayMethod = false;
     private string methods = "";
@@ -39,9 +38,7 @@ public class DefaultComponent : AbstractComponent
         this.text += "\n\tIs Enum = " + t.IsEnum;
         this.text += "\n\tAttributes = " + t.Attributes;
         this.fieldInfo = t.GetFields();
-        System.Reflection.PropertyInfo[] propertyInfo = t.GetProperties();
-        foreach (System.Reflection.PropertyInfo info in propertyInfo)
-            this.props += "\n" + info.Name + " " + info.PropertyType;
+        this.propertyInfo = t.GetProperties();
 
         MethodInfo[] methodInfos = t.GetMethods(BindingFlags.Public | BindingFlags.Instance);
         foreach (MethodInfo methodInfo in methodInfos)
@@ -107,7 +104,7 @@ public class DefaultComponent : AbstractComponent
                         info.SetValue(this.co, FieldView.displayString((string)value));
                         break;
                     case "System.Collections.Generic.List`1[System.String]":
-                        info.SetValue(this.co, FieldView.displayListString((List<string>)info.GetValue(this.co)));
+                        info.SetValue(this.co, FieldView.displayListString((List<string>)value));
                         break;
                     default:
                         if (value == null)
@@ -125,13 +122,63 @@ public class DefaultComponent : AbstractComponent
             }
         }
 
-        if (GUILayout.Button("Props", GUILayout.Height(16)))
+        if (this.propertyInfo.Length > 0 && GUILayout.Button("Props", GUILayout.Height(16)))
         {
             this.displayProps = !this.displayProps;
         }
         if (displayProps)
         {
-            GUILayout.TextArea(this.props);
+            foreach (System.Reflection.PropertyInfo info in propertyInfo)
+            {
+                GUILayout.BeginHorizontal();
+
+                GUILayout.Label(info.Name);
+
+                if (!info.CanWrite) {
+                    GUILayout.Label(info.PropertyType.ToString());
+                    GUILayout.EndHorizontal();
+                    continue;
+                } 
+
+                object value = info.GetValue(this.co, null);
+
+                switch (info.PropertyType.ToString())
+                {
+                    case "System.Boolean":
+                        info.SetValue(this.co, FieldView.displayBool((bool)value), null);
+                        break;
+                    case "UnityEngine.Vector3":
+                        info.SetValue(this.co, FieldView.displayVector3((Vector3)value), null);
+                        break;
+                    case "System.Int32":
+                        info.SetValue(this.co, FieldView.displayInt((int)value), null);
+                        break;
+                    case "System.Single":
+                        info.SetValue(this.co, FieldView.displayFloat((float)value), null);
+                        break;
+                    case "System.Double":
+                        info.SetValue(this.co, FieldView.displayDouble((double)value), null);
+                        break;
+                    case "System.String":
+                        info.SetValue(this.co, FieldView.displayString((string)value), null);
+                        break;
+                    case "System.Collections.Generic.List`1[System.String]":
+                        info.SetValue(this.co, FieldView.displayListString((List<string>)value), null);
+                        break;
+                    default:
+                        if (value == null)
+                        {
+                            GUILayout.Label("null");
+                        }
+                        else
+                        {
+                            GUILayout.Label(value.ToString());
+                        }
+                        break;
+                }
+
+                GUILayout.EndHorizontal();
+            }
         }
 
         if (GUILayout.Button("Methods", GUILayout.Height(16)))
@@ -143,6 +190,4 @@ public class DefaultComponent : AbstractComponent
             GUILayout.TextArea(this.methods);
         }
     }
-
-
 }
