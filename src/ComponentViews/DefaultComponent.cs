@@ -85,25 +85,31 @@ public class DefaultComponent : AbstractComponent
 
                 GUILayout.Label(info.Name);
 
+                object value = info.GetValue(this.co);
                 switch (info.FieldType.ToString())
                 {
                     case "System.Boolean":
-                        info.SetValue(this.co, FieldView.displayBool((bool)info.GetValue(this.co)));
+                        info.SetValue(this.co, FieldView.displayBool((bool)value));
                         break;
                     case "UnityEngine.Vector3":
-                        info.SetValue(this.co, FieldView.displayVector3((Vector3)info.GetValue(this.co)));
+                        info.SetValue(this.co, FieldView.displayVector3((Vector3)value));
                         break;
                     case "System.Int32":
-                        info.SetValue(this.co, FieldView.displayInt((int)info.GetValue(this.co)));
+                        info.SetValue(this.co, FieldView.displayInt((int)value));
                         break;
                     case "System.Single":
-                        info.SetValue(this.co, FieldView.displayFloat((float)info.GetValue(this.co)));
+                        info.SetValue(this.co, FieldView.displayFloat((float)value));
                         break;
                     case "System.Double":
-                        info.SetValue(this.co, FieldView.displayDouble((double)info.GetValue(this.co)));
+                        info.SetValue(this.co, FieldView.displayDouble((double)value));
+                        break;
+                    case "System.String":
+                        info.SetValue(this.co, FieldView.displayString((string)value));
+                        break;
+                    case "System.Collections.Generic.List`1[System.String]":
+                        info.SetValue(this.co, FieldView.displayListString((List<string>)info.GetValue(this.co)));
                         break;
                     default:
-                        var value = info.GetValue(this.co);
                         if (value == null)
                         {
                             GUILayout.Label("null");

@@ -48,4 +48,24 @@ public class FieldView
     {
         return GUILayout.Toggle(input, "");
     }
+
+    public static string displayString(string input)
+    {
+        return GUILayout.TextField(input);
+    }
+
+    public static List<string> displayListString(List<string> input)
+    {
+        GUILayout.BeginVertical();
+
+        GUILayout.Label("Length: " + input.Count);
+        foreach(string str in input)
+        {
+            GUILayout.Label(str);
+        }
+
+        GUILayout.EndVertical();
+
+        return input;
+    }
 }
