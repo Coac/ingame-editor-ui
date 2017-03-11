@@ -9,18 +9,20 @@ The Hierarchy displays all GameObjects in the active Scene.
 
 - Update the GameObject list
 - Save all displayed GameObject in a text file
+- Show the child count
 - Expand a GameObject to show its children
-- Remove a GameObject
 - Inspect a GameObject
 
 ### Inspector
 The Hierarchy lists the components of the selected GameObject
 - Display general information (tag, layer)
+- Remove the inspected GameObject
 - Remove a components
 - Enable/Disable a MonoBehaviour
 - Show the component fields
 - Show the component props
 - Show the component methods
+- Edit on the fly component fields/props
 
 ### Debug Console
 The Debug Console acts as the Console in Unity Editor.
