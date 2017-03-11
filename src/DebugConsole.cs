@@ -53,9 +53,9 @@ public class DebugConsole
         foreach (Log log in logs)
         {
             GUIStyle style = new GUIStyle();
-
             switch (log.logType)
             {
+                case LogType.Exception:
                 case LogType.Error:
                     if (!displayError) continue;
                     style.normal.textColor = Color.red;
@@ -65,7 +65,7 @@ public class DebugConsole
                     style.normal.textColor = Color.yellow;
                     break;
                 default:
-                    if (!displayWarning) continue;
+                    if (!displayNormal) continue;
                     style.normal.textColor = Color.white;
                     break;
             }
