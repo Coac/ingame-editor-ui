@@ -18,6 +18,8 @@ public class DefaultComponent : AbstractComponent
 
     private bool displayField = false;
     private string fields = "";
+    private System.Reflection.FieldInfo[] fieldInfo;
+
 
     private bool displayProps = false;
     private string props = "";
@@ -36,12 +38,10 @@ public class DefaultComponent : AbstractComponent
         this.text += "\n\tIs Class = " + t.IsClass;
         this.text += "\n\tIs Enum = " + t.IsEnum;
         this.text += "\n\tAttributes = " + t.Attributes;
-        System.Reflection.FieldInfo[] fieldInfo = t.GetFields();
-        foreach (System.Reflection.FieldInfo info in fieldInfo)
-            this.fields += "\n" + info.Name;
+        this.fieldInfo = t.GetFields();
         System.Reflection.PropertyInfo[] propertyInfo = t.GetProperties();
         foreach (System.Reflection.PropertyInfo info in propertyInfo)
-            this.props += "\n" + info.Name;
+            this.props += "\n" + info.Name + " " + info.PropertyType;
 
         MethodInfo[] methodInfos = t.GetMethods(BindingFlags.Public | BindingFlags.Instance);
         foreach (MethodInfo methodInfo in methodInfos)
@@ -73,13 +73,40 @@ public class DefaultComponent : AbstractComponent
         GUILayout.TextArea(this.text);
 
 
-        if (fields != "" && GUILayout.Button("Fields", GUILayout.Height(16)))
+        if (this.fieldInfo.Length > 0 && GUILayout.Button("Fields", GUILayout.Height(16)))
         {
             this.displayField = !this.displayField;
         }
         if (displayField)
         {
-            GUILayout.TextArea(this.fields);
+            foreach (System.Reflection.FieldInfo info in fieldInfo)
+            {
+                GUILayout.BeginHorizontal();
+
+                GUILayout.Label(info.Name);
+
+                switch (info.FieldType.ToString())
+                {
+                    case "System.Boolean":
+                        GUILayout.Label("");
+                        info.SetValue(this.co, GUILayout.Toggle((bool)info.GetValue(this.co), info.Name));
+                        break;
+                    default:
+                        GUILayout.Label(info.FieldType.ToString());
+                        var value = info.GetValue(this.co);
+                        if (value == null)
+                        {
+                            GUILayout.Label("null");
+                        }
+                        else
+                        {
+                            GUILayout.Label(value.ToString());
+                        }
+                        break;
+                }
+
+                GUILayout.EndHorizontal();
+            }
         }
 
         if (GUILayout.Button("Props", GUILayout.Height(16)))
