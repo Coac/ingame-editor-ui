@@ -14,13 +14,14 @@ using UnityEngine;
 
 public class Inspector
 {
-
-    private GameObject go;
+    public GameObject go;
     private List<AbstractComponent> componentsViews = new List<AbstractComponent>();
+    private ComponentAdd componentAdd;
 
     public Inspector(Rect inspectorRect)
     {
         this.inspectorRect = inspectorRect;
+        this.componentAdd = new ComponentAdd(this);
     }
 
     public void draw()
@@ -44,6 +45,8 @@ public class Inspector
         }
 
         GUILayout.EndScrollView();
+
+        componentAdd.draw();
     }
 
     public void setGameObject(GameObject go)
@@ -78,7 +81,7 @@ public class Inspector
         GUILayout.EndHorizontal();
     }
 
-    private void displayComponents()
+    public void displayComponents()
     {
         this.componentsViews.Clear();
         foreach (Component co in this.go.GetComponents(typeof(Component)))
