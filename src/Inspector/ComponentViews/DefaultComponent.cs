@@ -6,6 +6,7 @@
  * =========================================================================*/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -107,6 +108,7 @@ public class DefaultComponent : AbstractComponent
                         info.SetValue(this.co, FieldView.displayListString((List<string>)value));
                         break;
                     default:
+
                         if (value == null)
                         {
                             GUILayout.Label("null");
@@ -115,6 +117,24 @@ public class DefaultComponent : AbstractComponent
                         {
                             GUILayout.Label(value.ToString());
                         }
+
+                        if (info.FieldType.ToString().Contains("System.Collections.Generic.List`1"))
+                        {
+                            try
+                            {
+                                IEnumerable list = (IEnumerable)value;
+                                GUILayout.BeginVertical();
+                                foreach (var str in list)
+                                {
+                                    if (str == null) continue;
+
+                                    GUILayout.Label(str.ToString());
+                                }
+                                GUILayout.EndVertical();
+                            }
+                            catch { }
+                        }
+
                         break;
                 }
 
