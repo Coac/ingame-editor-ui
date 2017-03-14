@@ -17,7 +17,9 @@ public class TransformVelocityLine : MonoBehaviour
 
     void Update()
     {
-        DrawLine(this.transform.position, this.transform.position - (lastPos - this.transform.position) * 10, Color.white, Time.deltaTime);
+        float speed = (Vector3.Distance(lastPos, this.transform.position) / Time.deltaTime);
+        Vector3 velocity = speed * (lastPos - this.transform.position).normalized;
+        DrawLine(this.transform.position, this.transform.position - velocity, Color.white, Time.deltaTime * 2);
         lastPos = this.transform.position;
     }
 
