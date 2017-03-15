@@ -11,13 +11,11 @@ using UnityEngine;
 
 public class Hierarchy {
 
-    private List<GameObject> rootObjects;
     private List<GameObjectItem> rootObjectItems;
     private Inspector inspector;
 
     public Hierarchy(Rect hierachyRect, Inspector inspector)
     {
-        this.rootObjects = new List<GameObject>();
         this.rootObjectItems = new List<GameObjectItem>();
         this.inspector = inspector;
         this.hierachyRect = hierachyRect;
@@ -26,16 +24,30 @@ public class Hierarchy {
 
     private void updateRootObjects()
     {
-        this.rootObjects.Clear();
-        this.rootObjectItems.Clear();
-
-        foreach (Transform xform in UnityEngine.Object.FindObjectsOfType<Transform>())
+        List<GameObject> updatedRootObjects = new List<GameObject>(UnityEngine.Object.FindObjectsOfType<GameObject>());
+        for (int i = 0; i < updatedRootObjects.Count; i++)
         {
-            if (xform.parent == null)
+            if(updatedRootObjects[i].transform.parent != null)
             {
-                rootObjects.Add(xform.gameObject);
-                rootObjectItems.Add(new GameObjectItem(xform.gameObject, inspector));
+                updatedRootObjects.RemoveAt(i);
+                i--;
             }
+        }
+
+        for (int i = 0; i < rootObjectItems.Count; i++)
+        {
+            if (!updatedRootObjects.Contains(rootObjectItems[i].go))
+            {
+                this.rootObjectItems.Remove(rootObjectItems[i]);
+                i--;
+            }
+            else
+                updatedRootObjects.Remove(rootObjectItems[i].go);
+        }
+
+        foreach (GameObject go in updatedRootObjects)
+        {
+            rootObjectItems.Add(new GameObjectItem(go, inspector));
         }
     }
 
