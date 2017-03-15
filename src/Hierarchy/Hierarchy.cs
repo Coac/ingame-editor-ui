@@ -64,6 +64,11 @@ public class Hierarchy
         {
             rootObjectItems.Add(new GameObjectItem(go, inspector));
         }
+
+        foreach(var item in rootObjectItems)
+        {
+            item.updateChild();
+        }
     }
 
     public void draw()

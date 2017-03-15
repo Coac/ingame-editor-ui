@@ -20,6 +20,7 @@ public class GameObjectItem
     private int childLevel = 0;
     private Inspector inspector;
     public bool isSelected = false;
+    public bool isExpanded = false;
 
     protected static GameObjectItem lastSelected;
 
@@ -44,9 +45,45 @@ public class GameObjectItem
         this.gameObjectDisplay();
 
         GUI.color = Color.white;
-        foreach (GameObjectItem item in this.childItems)
+
+        for (int i = 0; i < childItems.Count; i++)
         {
-            item.draw();
+            if(childItems[i].go != null)
+            {
+                childItems[i].draw();
+            }
+            else
+            {
+                childItems.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
+    public void updateChild()
+    {
+        if (!isExpanded) return;
+        if(childItems.Count < this.go.transform.childCount)
+        {
+            foreach (Transform child in go.transform)
+            {
+                bool contains = false;
+                foreach(var item in childItems)
+                {
+                    if(item.go.transform == child)
+                    {
+                        contains = true;
+                        break;
+                    }
+                }
+                if(!contains)
+                    this.childItems.Add(new GameObjectItem(child.gameObject, this.inspector, this.childLevel + 1));
+            }
+        }
+
+        foreach (var item in childItems)
+        {
+            item.updateChild();
         }
     }
 
@@ -82,10 +119,12 @@ public class GameObjectItem
         if (childItems.Count > 0)
         {
             this.childItems.Clear();
+            isExpanded = false;
             return;
         }
 
         this.expandChild();
+        isExpanded = true;
     }
 
     private void expandChild()
