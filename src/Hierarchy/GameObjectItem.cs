@@ -21,6 +21,7 @@ public class GameObjectItem
     private Inspector inspector;
     public bool isSelected = false;
     public bool isExpanded = false;
+    private Transform parent;
 
     protected static GameObjectItem lastSelected;
 
@@ -28,6 +29,7 @@ public class GameObjectItem
     {
         this.go = go;
         this.inspector = inspector;
+        this.parent = go.transform.parent;
     }
 
     public GameObjectItem(GameObject go, Inspector inspector, int childLevel)
@@ -35,6 +37,7 @@ public class GameObjectItem
         this.go = go;
         this.childLevel = childLevel;
         this.inspector = inspector;
+        this.parent = go.transform.parent;
     }
 
     public void draw()
@@ -62,8 +65,15 @@ public class GameObjectItem
 
     public void updateChild()
     {
+        if(this.parent != this.go.transform.parent) // Parent changed
+        {
+            this.go = null;
+            return;
+        }
+
         if (!isExpanded) return;
-        if(childItems.Count < this.go.transform.childCount)
+
+        if (childItems.Count < this.go.transform.childCount)
         {
             foreach (Transform child in go.transform)
             {
@@ -86,6 +96,7 @@ public class GameObjectItem
             item.updateChild();
         }
     }
+
 
     private void gameObjectDisplay()
     {
