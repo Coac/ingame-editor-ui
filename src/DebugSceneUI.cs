@@ -26,7 +26,7 @@ public class DebugSceneUI : MonoBehaviour
     void Start()
     {
         this.inspector = new Inspector(new Rect(Screen.width - 400, 0, 400, Screen.height - Screen.height / 5));
-        this.hierarchy = new Hierarchy(new Rect(0, 0, 500, Screen.height), this.inspector);
+        this.hierarchy = new Hierarchy(new Rect(0, 0, 500, Screen.height), this.inspector, this);
         this.console = new DebugConsole(new Rect(500, Screen.height - Screen.height / 5, Screen.width - 500, Screen.height / 5));
         this.fps = new FPSCounter(new Rect(Screen.width / 2, 0, 100, 100));
         StartCoroutine(this.fps.fpsCounter());

@@ -9,17 +9,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hierarchy {
+public class Hierarchy
+{
 
     private List<GameObjectItem> rootObjectItems;
     private Inspector inspector;
+    private MonoBehaviour mono;
+    private float updateRate;
 
-    public Hierarchy(Rect hierachyRect, Inspector inspector)
+    public Hierarchy(Rect hierachyRect, Inspector inspector, MonoBehaviour mono)
     {
         this.rootObjectItems = new List<GameObjectItem>();
         this.inspector = inspector;
         this.hierachyRect = hierachyRect;
-        this.updateRootObjects();
+        this.mono = mono;
+        this.updateRate = 1f;
+
+        this.mono.StartCoroutine(updateGoCoroutine());
+    }
+
+    IEnumerator updateGoCoroutine()
+    {
+        while (true)
+        {
+            this.updateRootObjects();
+            yield return new WaitForSeconds(this.updateRate);
+        }
     }
 
     private void updateRootObjects()
@@ -27,7 +42,7 @@ public class Hierarchy {
         List<GameObject> updatedRootObjects = new List<GameObject>(UnityEngine.Object.FindObjectsOfType<GameObject>());
         for (int i = 0; i < updatedRootObjects.Count; i++)
         {
-            if(updatedRootObjects[i].transform.parent != null)
+            if (updatedRootObjects[i].transform.parent != null)
             {
                 updatedRootObjects.RemoveAt(i);
                 i--;
@@ -91,7 +106,7 @@ public class Hierarchy {
     {
         string str = "";
 
-        foreach(GameObjectItem item in this.rootObjectItems)
+        foreach (GameObjectItem item in this.rootObjectItems)
         {
             str += item.ToString() + "\n";
         }
