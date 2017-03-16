@@ -85,6 +85,11 @@ public class Hierarchy
             this.updateRootObjects();
         }
 
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Update Rate : " + this.updateRate.ToString("0.00") + " seconds");
+        this.updateRate = GUILayout.HorizontalSlider(this.updateRate, 0.0f, 2.0f);
+        GUILayout.EndHorizontal();
+
         if (GUILayout.Button("Save GameObjects in TextFile"))
         {
             this.saveGameObjectsAsTxtFile();
