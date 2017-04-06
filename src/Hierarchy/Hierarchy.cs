@@ -2,7 +2,7 @@
  * Hierarchy list the active gameObjects
  * 
  * Author: Victor Le aka "Coac"
- * Repository : https://github.com/Coac/debug-scene-ui
+ * Repository : https://github.com/Coac/ingame-editor-ui.git
  * =======================================================================*/
 
 using System.Collections;

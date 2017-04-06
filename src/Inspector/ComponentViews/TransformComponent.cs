@@ -2,7 +2,7 @@
  * TransformComponent is a Unity.Transform Component representation
  * 
  * Author: Victor Le aka "Coac"
- * Repository : https://github.com/Coac/debug-scene-ui
+ * Repository : https://github.com/Coac/ingame-editor-ui.git
  * =========================================================================*/
 
 using System;

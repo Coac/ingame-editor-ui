@@ -2,7 +2,7 @@
  * FPSCounter computes and displays the number of frame per second
  * 
  * Author: Victor Le aka "Coac"
- * Repository : https://github.com/Coac/debug-scene-ui
+ * Repository : https://github.com/Coac/ingame-editor-ui.git
  * =======================================================================*/
 
 using System.Collections;
