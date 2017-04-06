@@ -1,4 +1,4 @@
-# Debug Scene UI
+# Ingame Editor UI
 Unity3D in-game UI which shows at runtime a Hierarchy and a Inspector like the built-in Editor.
 Can be useful when testing game on Android or doing some reverse-engineering ;)
 
@@ -36,7 +36,7 @@ The Debug Console acts as the Console in Unity Editor.
 - Display FPS
 
 ## Usage
-Simply drops the scripts in your Unity3D Project and attach `DebugSceneUI` to a GameObject
+Simply drops the scripts in your Unity3D Project and attach `IngameEditorUI` to a GameObject
 
 ## Example
 Used in the free [Flappy Bird Style Project](https://www.assetstore.unity3d.com/en/#!/content/80330)
