@@ -38,7 +38,4 @@ The Debug Console acts as the Console in Unity Editor.
 ## Usage
 Simply drops the scripts in your Unity3D Project and attach `IngameEditorUI` to a GameObject
 
-## Example
-Used in the free [Flappy Bird Style Project](https://www.assetstore.unity3d.com/en/#!/content/80330)
-
 ![ScreenDemo png](/screenDemo.png)
