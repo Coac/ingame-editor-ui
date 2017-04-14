@@ -1,5 +1,5 @@
 # Ingame Editor UI
-Unity3D in-game UI which shows at runtime a Hierarchy and a Inspector like the built-in Editor.
+Unity3D in-game UI, which shows at runtime a Hierarchy and an Inspector like the built-in Editor.
 Can be useful when testing game on Android or doing some reverse-engineering ;)
 
 ## Features
@@ -17,7 +17,7 @@ The Hierarchy displays all GameObjects in the active Scene.
 The Hierarchy lists the components of the selected GameObject
 - Display general information (tag, layer)
 - Remove the inspected GameObject
-- Remove a components
+- Remove a component
 - Enable/Disable a MonoBehaviour
 - Show the component fields
 - Show the component props
@@ -36,6 +36,6 @@ The Debug Console acts as the Console in Unity Editor.
 - Display FPS
 
 ## Usage
-Simply drops the scripts in your Unity3D Project and attach `IngameEditorUI` to a GameObject
+Simply drop the scripts in your Unity3D Project and attach `IngameEditorUI` to a GameObject
 
 ![ScreenDemo png](/screenDemo.png)
